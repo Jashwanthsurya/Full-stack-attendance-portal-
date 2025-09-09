@@ -29,12 +29,21 @@ def load_students():
             return json.load(f)
     except FileNotFoundError:
         # Create initial student data if file doesn't exist
+        student_names = [
+            'Alex', 'Blake', 'Casey', 'Drew', 'Eli', 'Finn', 'Gray', 'Harper', 'Ivan', 'Jade',
+            'Kyle', 'Luna', 'Max', 'Nova', 'Oliver', 'Paris', 'Quinn', 'River', 'Sam', 'Taylor',
+            'Uma', 'Victor', 'Wade', 'Xara', 'Yale', 'Zoe', 'Ash', 'Brook', 'Clay', 'Dawn',
+            'Ember', 'Ford', 'Grace', 'Heath', 'Iris', 'Juno', 'Knox', 'Lexi', 'Mira', 'Nash'
+        ]
+        
         students = {}
         for i in range(1, 41):
             roll_number = str(i)
-            students[roll_number] = {
-                'name': f'Student {i:02d}',
+            shortname = student_names[i-1]  # Get unique shortname
+            students[shortname.lower()] = {  # Use lowercase shortname as key
+                'name': f'{shortname} (Roll {i:02d})',
                 'roll_number': roll_number,
+                'shortname': shortname.lower(),
                 'password': f'pass{i:02d}',
                 'class': '10'
             }
