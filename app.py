@@ -61,11 +61,21 @@ def save_attendance(attendance):
 
 def is_class_time(subject):
     """Check if current time falls within the specified class schedule"""
+    # Debug mode - allow attendance marking at any time for testing
+    debug_mode = os.environ.get('DEBUG_MODE', 'false').lower() == 'true'
+    if debug_mode:
+        logging.debug(f"DEBUG MODE: Allowing attendance for {subject} at any time")
+        return True
+    
     current_time = datetime.now().time()
     schedule = CLASS_SCHEDULE.get(subject)
     if not schedule:
+        logging.debug(f"No schedule found for subject: {subject}")
         return False
-    return schedule['start'] <= current_time <= schedule['end']
+    
+    is_time = schedule['start'] <= current_time <= schedule['end']
+    logging.debug(f"Time check for {subject}: Current={current_time}, Start={schedule['start']}, End={schedule['end']}, Result={is_time}")
+    return is_time
 
 def has_marked_attendance_today(roll_number, subject):
     """Check if student has already marked attendance for the subject today"""
@@ -232,6 +242,25 @@ def logout():
     session.clear()
     flash('You have been logged out successfully.', 'info')
     return redirect(url_for('login'))
+
+@app.route('/debug/time')
+def debug_time():
+    """Debug route to show current server time and class availability"""
+    current_time = datetime.now()
+    debug_info = {
+        'current_time': current_time.strftime('%Y-%m-%d %H:%M:%S'),
+        'current_time_only': current_time.time().strftime('%H:%M:%S'),
+        'class_status': {}
+    }
+    
+    for subject, schedule in CLASS_SCHEDULE.items():
+        debug_info['class_status'][subject] = {
+            'start': schedule['start'].strftime('%H:%M:%S'),
+            'end': schedule['end'].strftime('%H:%M:%S'),
+            'is_active': is_class_time(subject)
+        }
+    
+    return f"<pre>{json.dumps(debug_info, indent=2)}</pre>"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

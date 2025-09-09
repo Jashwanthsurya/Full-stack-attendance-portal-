@@ -60,8 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Enhance form validation
-    const forms = document.querySelectorAll('form[novalidate]');
-    forms.forEach(function(form) {
+    const validationForms = document.querySelectorAll('form[novalidate]');
+    validationForms.forEach(function(form) {
         form.addEventListener('submit', function(e) {
             if (!form.checkValidity()) {
                 e.preventDefault();
