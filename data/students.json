@@ -1,0 +1,282 @@
+{
+  "alex": {
+    "name": "Alex (Roll 01)",
+    "roll_number": "1",
+    "shortname": "alex",
+    "password": "pass01",
+    "class": "10"
+  },
+  "blake": {
+    "name": "Blake (Roll 02)",
+    "roll_number": "2",
+    "shortname": "blake",
+    "password": "pass02",
+    "class": "10"
+  },
+  "casey": {
+    "name": "Casey (Roll 03)",
+    "roll_number": "3",
+    "shortname": "casey",
+    "password": "pass03",
+    "class": "10"
+  },
+  "drew": {
+    "name": "Drew (Roll 04)",
+    "roll_number": "4",
+    "shortname": "drew",
+    "password": "pass04",
+    "class": "10"
+  },
+  "eli": {
+    "name": "Eli (Roll 05)",
+    "roll_number": "5",
+    "shortname": "eli",
+    "password": "pass05",
+    "class": "10"
+  },
+  "finn": {
+    "name": "Finn (Roll 06)",
+    "roll_number": "6",
+    "shortname": "finn",
+    "password": "pass06",
+    "class": "10"
+  },
+  "gray": {
+    "name": "Gray (Roll 07)",
+    "roll_number": "7",
+    "shortname": "gray",
+    "password": "pass07",
+    "class": "10"
+  },
+  "harper": {
+    "name": "Harper (Roll 08)",
+    "roll_number": "8",
+    "shortname": "harper",
+    "password": "pass08",
+    "class": "10"
+  },
+  "ivan": {
+    "name": "Ivan (Roll 09)",
+    "roll_number": "9",
+    "shortname": "ivan",
+    "password": "pass09",
+    "class": "10"
+  },
+  "jade": {
+    "name": "Jade (Roll 10)",
+    "roll_number": "10",
+    "shortname": "jade",
+    "password": "pass10",
+    "class": "10"
+  },
+  "kyle": {
+    "name": "Kyle (Roll 11)",
+    "roll_number": "11",
+    "shortname": "kyle",
+    "password": "pass11",
+    "class": "10"
+  },
+  "luna": {
+    "name": "Luna (Roll 12)",
+    "roll_number": "12",
+    "shortname": "luna",
+    "password": "pass12",
+    "class": "10"
+  },
+  "max": {
+    "name": "Max (Roll 13)",
+    "roll_number": "13",
+    "shortname": "max",
+    "password": "pass13",
+    "class": "10"
+  },
+  "nova": {
+    "name": "Nova (Roll 14)",
+    "roll_number": "14",
+    "shortname": "nova",
+    "password": "pass14",
+    "class": "10"
+  },
+  "oliver": {
+    "name": "Oliver (Roll 15)",
+    "roll_number": "15",
+    "shortname": "oliver",
+    "password": "pass15",
+    "class": "10"
+  },
+  "paris": {
+    "name": "Paris (Roll 16)",
+    "roll_number": "16",
+    "shortname": "paris",
+    "password": "pass16",
+    "class": "10"
+  },
+  "quinn": {
+    "name": "Quinn (Roll 17)",
+    "roll_number": "17",
+    "shortname": "quinn",
+    "password": "pass17",
+    "class": "10"
+  },
+  "river": {
+    "name": "River (Roll 18)",
+    "roll_number": "18",
+    "shortname": "river",
+    "password": "pass18",
+    "class": "10"
+  },
+  "sam": {
+    "name": "Sam (Roll 19)",
+    "roll_number": "19",
+    "shortname": "sam",
+    "password": "pass19",
+    "class": "10"
+  },
+  "taylor": {
+    "name": "Taylor (Roll 20)",
+    "roll_number": "20",
+    "shortname": "taylor",
+    "password": "pass20",
+    "class": "10"
+  },
+  "uma": {
+    "name": "Uma (Roll 21)",
+    "roll_number": "21",
+    "shortname": "uma",
+    "password": "pass21",
+    "class": "10"
+  },
+  "victor": {
+    "name": "Victor (Roll 22)",
+    "roll_number": "22",
+    "shortname": "victor",
+    "password": "pass22",
+    "class": "10"
+  },
+  "wade": {
+    "name": "Wade (Roll 23)",
+    "roll_number": "23",
+    "shortname": "wade",
+    "password": "pass23",
+    "class": "10"
+  },
+  "xara": {
+    "name": "Xara (Roll 24)",
+    "roll_number": "24",
+    "shortname": "xara",
+    "password": "pass24",
+    "class": "10"
+  },
+  "yale": {
+    "name": "Yale (Roll 25)",
+    "roll_number": "25",
+    "shortname": "yale",
+    "password": "pass25",
+    "class": "10"
+  },
+  "zoe": {
+    "name": "Zoe (Roll 26)",
+    "roll_number": "26",
+    "shortname": "zoe",
+    "password": "pass26",
+    "class": "10"
+  },
+  "ash": {
+    "name": "Ash (Roll 27)",
+    "roll_number": "27",
+    "shortname": "ash",
+    "password": "pass27",
+    "class": "10"
+  },
+  "brook": {
+    "name": "Brook (Roll 28)",
+    "roll_number": "28",
+    "shortname": "brook",
+    "password": "pass28",
+    "class": "10"
+  },
+  "clay": {
+    "name": "Clay (Roll 29)",
+    "roll_number": "29",
+    "shortname": "clay",
+    "password": "pass29",
+    "class": "10"
+  },
+  "dawn": {
+    "name": "Dawn (Roll 30)",
+    "roll_number": "30",
+    "shortname": "dawn",
+    "password": "pass30",
+    "class": "10"
+  },
+  "ember": {
+    "name": "Ember (Roll 31)",
+    "roll_number": "31",
+    "shortname": "ember",
+    "password": "pass31",
+    "class": "10"
+  },
+  "ford": {
+    "name": "Ford (Roll 32)",
+    "roll_number": "32",
+    "shortname": "ford",
+    "password": "pass32",
+    "class": "10"
+  },
+  "grace": {
+    "name": "Grace (Roll 33)",
+    "roll_number": "33",
+    "shortname": "grace",
+    "password": "pass33",
+    "class": "10"
+  },
+  "heath": {
+    "name": "Heath (Roll 34)",
+    "roll_number": "34",
+    "shortname": "heath",
+    "password": "pass34",
+    "class": "10"
+  },
+  "iris": {
+    "name": "Iris (Roll 35)",
+    "roll_number": "35",
+    "shortname": "iris",
+    "password": "pass35",
+    "class": "10"
+  },
+  "juno": {
+    "name": "Juno (Roll 36)",
+    "roll_number": "36",
+    "shortname": "juno",
+    "password": "pass36",
+    "class": "10"
+  },
+  "knox": {
+    "name": "Knox (Roll 37)",
+    "roll_number": "37",
+    "shortname": "knox",
+    "password": "pass37",
+    "class": "10"
+  },
+  "lexi": {
+    "name": "Lexi (Roll 38)",
+    "roll_number": "38",
+    "shortname": "lexi",
+    "password": "pass38",
+    "class": "10"
+  },
+  "mira": {
+    "name": "Mira (Roll 39)",
+    "roll_number": "39",
+    "shortname": "mira",
+    "password": "pass39",
+    "class": "10"
+  },
+  "nash": {
+    "name": "Nash (Roll 40)",
+    "roll_number": "40",
+    "shortname": "nash",
+    "password": "pass40",
+    "class": "10"
+  }
+}
