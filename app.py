@@ -2,7 +2,11 @@ import os
 import json
 import logging
 from datetime import datetime, time
-from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify, send_file
+import pandas as pd
+from openpyxl import Workbook
+from openpyxl.styles import Font, Alignment, PatternFill
+import io
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
@@ -261,6 +265,69 @@ def logout():
     session.clear()
     flash('You have been logged out successfully.', 'info')
     return redirect(url_for('login'))
+
+@app.route('/admin/export')
+def export_attendance():
+    """Export attendance data to Excel file"""
+    if 'is_admin' not in session:
+        flash('Admin access required.', 'error')
+        return redirect(url_for('login'))
+    
+    attendance = load_attendance()
+    students = load_students()
+    
+    # Create workbook and worksheet
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Attendance Report"
+    
+    # Add headers
+    headers = ['Date', 'Student Name', 'Roll Number', 'Subject', 'Time Marked']
+    ws.append(headers)
+    
+    # Style headers
+    header_font = Font(bold=True)
+    header_fill = PatternFill(start_color="CCCCCC", end_color="CCCCCC", fill_type="solid")
+    for col in range(1, len(headers) + 1):
+        cell = ws.cell(row=1, column=col)
+        cell.font = header_font
+        cell.fill = header_fill
+        cell.alignment = Alignment(horizontal="center")
+    
+    # Add data
+    for key, record in attendance.items():
+        ws.append([
+            record['date'],
+            record['student_name'],
+            record['roll_number'],
+            record['subject'],
+            record['time']
+        ])
+    
+    # Auto-adjust column widths
+    for column in ws.columns:
+        max_length = 0
+        column_letter = column[0].column_letter
+        for cell in column:
+            try:
+                if len(str(cell.value)) > max_length:
+                    max_length = len(str(cell.value))
+            except:
+                pass
+        adjusted_width = min(max_length + 2, 50)
+        ws.column_dimensions[column_letter].width = adjusted_width
+    
+    # Save to BytesIO
+    excel_file = io.BytesIO()
+    wb.save(excel_file)
+    excel_file.seek(0)
+    
+    return send_file(
+        excel_file,
+        as_attachment=True,
+        download_name=f'attendance_report_{datetime.now().strftime("%Y%m%d_%H%M%S")}.xlsx',
+        mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
 
 @app.route('/debug/time')
 def debug_time():
