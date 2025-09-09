@@ -61,13 +61,10 @@ def save_attendance(attendance):
 
 def is_class_time(subject):
     """Check if current time falls within the specified class schedule"""
-    # Debug mode - allow attendance marking at any time for testing
-    debug_mode = os.environ.get('DEBUG_MODE', 'false').lower() == 'true'
-    if debug_mode:
-        logging.debug(f"DEBUG MODE: Allowing attendance for {subject} at any time")
-        return True
+    # For testing purposes, simulate time as 9:10 AM
+    simulated_time = time(9, 10)  # 9:10 AM
+    current_time = simulated_time
     
-    current_time = datetime.now().time()
     schedule = CLASS_SCHEDULE.get(subject)
     if not schedule:
         logging.debug(f"No schedule found for subject: {subject}")
@@ -246,10 +243,12 @@ def logout():
 @app.route('/debug/time')
 def debug_time():
     """Debug route to show current server time and class availability"""
-    current_time = datetime.now()
+    actual_time = datetime.now()
+    simulated_time = time(9, 10)  # Same as in is_class_time function
     debug_info = {
-        'current_time': current_time.strftime('%Y-%m-%d %H:%M:%S'),
-        'current_time_only': current_time.time().strftime('%H:%M:%S'),
+        'actual_server_time': actual_time.strftime('%Y-%m-%d %H:%M:%S'),
+        'simulated_time': simulated_time.strftime('%H:%M:%S'),
+        'note': 'Using simulated time 9:10 AM for testing',
         'class_status': {}
     }
     
