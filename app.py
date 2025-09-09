@@ -100,18 +100,27 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        roll_number = request.form.get('roll_number')
+        login_input = request.form.get('login_input', '').lower().strip()
         password = request.form.get('password')
+        
+        # Check for admin login
+        if login_input == 'admin' and password == 'admin123':
+            session['is_admin'] = True
+            session['admin_name'] = 'Administrator'
+            flash('Welcome, Administrator!', 'success')
+            return redirect(url_for('admin'))
         
         students = load_students()
         
-        if roll_number in students and students[roll_number]['password'] == password:
-            session['roll_number'] = roll_number
-            session['student_name'] = students[roll_number]['name']
-            flash(f'Welcome, {students[roll_number]["name"]}!', 'success')
+        # Check if login_input is a shortname
+        if login_input in students and students[login_input]['password'] == password:
+            session['roll_number'] = students[login_input]['roll_number']
+            session['student_name'] = students[login_input]['name']
+            session['shortname'] = login_input
+            flash(f'Welcome, {students[login_input]["name"]}!', 'success')
             return redirect(url_for('dashboard'))
         else:
-            flash('Invalid roll number or password. Please try again.', 'error')
+            flash('Invalid shortname or password. Please try again.', 'error')
     
     return render_template('login.html')
 
@@ -218,7 +227,11 @@ def confirm_attendance(subject):
 
 @app.route('/admin')
 def admin():
-    # Simple admin view - in production, this should have proper authentication
+    # Check admin authentication
+    if 'is_admin' not in session:
+        flash('Admin access required. Please login as admin.', 'error')
+        return redirect(url_for('login'))
+    
     attendance = load_attendance()
     students = load_students()
     
