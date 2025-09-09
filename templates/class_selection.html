@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Class Selection - Student Attendance System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>
+                <i class="fas fa-list-alt me-2"></i>
+                Select Class for Attendance
+            </h2>
+            <div class="text-muted">
+                <i class="fas fa-clock me-2"></i>
+                Current Time: {{ current_time }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    {% for subject, info in available_classes.items() %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 {% if info.has_marked %}border-success{% elif info.is_available %}border-primary{% else %}border-secondary{% endif %}">
+            <div class="card-body d-flex flex-column">
+                <div class="text-center mb-3">
+                    {% if info.has_marked %}
+                        <i class="fas fa-check-circle text-success fa-3x"></i>
+                    {% elif info.is_available %}
+                        <i class="fas fa-clock text-primary fa-3x"></i>
+                    {% else %}
+                        <i class="fas fa-times-circle text-muted fa-3x"></i>
+                    {% endif %}
+                </div>
+                
+                <h5 class="card-title text-center">{{ subject }}</h5>
+                
+                <div class="text-center mb-3">
+                    <small class="text-muted">
+                        <i class="fas fa-calendar-clock me-1"></i>
+                        {{ info.start_time }} - {{ info.end_time }}
+                    </small>
+                </div>
+                
+                <div class="text-center mb-3">
+                    {% if info.has_marked %}
+                        <span class="badge bg-success">
+                            <i class="fas fa-check me-1"></i>Already Marked
+                        </span>
+                    {% elif info.is_available %}
+                        <span class="badge bg-primary">
+                            <i class="fas fa-clock me-1"></i>Available Now
+                        </span>
+                    {% else %}
+                        <span class="badge bg-secondary">
+                            <i class="fas fa-lock me-1"></i>Not Available
+                        </span>
+                    {% endif %}
+                </div>
+                
+                <div class="mt-auto text-center">
+                    {% if info.has_marked %}
+                        <button class="btn btn-outline-success" disabled>
+                            <i class="fas fa-check me-2"></i>Attendance Marked
+                        </button>
+                    {% elif info.is_available %}
+                        <a href="{{ url_for('mark_attendance', subject=subject) }}" class="btn btn-primary">
+                            <i class="fas fa-hand-paper me-2"></i>Mark Attendance
+                        </a>
+                    {% else %}
+                        <button class="btn btn-outline-secondary" disabled>
+                            <i class="fas fa-clock me-2"></i>Class Not Active
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card bg-body-secondary">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Important Information
+                </h5>
+                <ul class="mb-0">
+                    <li>Attendance can only be marked during the scheduled class time</li>
+                    <li>You can mark attendance only once per subject per day</li>
+                    <li>Make sure you're attending the correct class before marking attendance</li>
+                    <li>If you encounter any issues, please contact your teacher</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+    </a>
+</div>
+{% endblock %}

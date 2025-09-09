@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Student Attendance System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>
+                <i class="fas fa-tachometer-alt me-2"></i>
+                Welcome, {{ session.student_name }}
+            </h2>
+            <div class="text-muted">
+                <i class="fas fa-calendar me-2"></i>
+                {{ moment().format('MMMM Do, YYYY') if moment else '' }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-check-circle me-2"></i>
+                    Today's Attendance Status
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    {% for subject, is_marked in today_attendance.items() %}
+                    <div class="col-md-6">
+                        <div class="card {% if is_marked %}border-success{% else %}border-secondary{% endif %}">
+                            <div class="card-body text-center">
+                                <div class="mb-2">
+                                    {% if is_marked %}
+                                        <i class="fas fa-check-circle text-success fa-2x"></i>
+                                    {% else %}
+                                        <i class="fas fa-clock text-secondary fa-2x"></i>
+                                    {% endif %}
+                                </div>
+                                <h6 class="card-title">{{ subject }}</h6>
+                                <p class="card-text">
+                                    {% if is_marked %}
+                                        <span class="badge bg-success">Present</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Not Marked</span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-calendar-alt me-2"></i>
+                    Class Schedule
+                </h5>
+            </div>
+            <div class="card-body">
+                {% for subject, schedule in class_schedule.items() %}
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <strong>{{ subject }}</strong>
+                        <br>
+                        <small class="text-muted">
+                            {{ schedule.start.strftime('%I:%M %p') }} - {{ schedule.end.strftime('%I:%M %p') }}
+                        </small>
+                    </div>
+                    <div>
+                        {% if today_attendance[subject] %}
+                            <i class="fas fa-check text-success"></i>
+                        {% else %}
+                            <i class="fas fa-minus text-muted"></i>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if not loop.last %}<hr>{% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body text-center">
+                <h5 class="card-title">
+                    <i class="fas fa-hand-paper me-2"></i>
+                    Mark Attendance
+                </h5>
+                <p class="card-text">Ready to mark your attendance for today's classes?</p>
+                <a href="{{ url_for('class_selection') }}" class="btn btn-primary">
+                    <i class="fas fa-plus me-2"></i>Mark Attendance
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

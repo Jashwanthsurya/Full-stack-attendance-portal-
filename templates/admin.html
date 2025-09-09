@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Admin View - Student Attendance System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>
+                <i class="fas fa-chart-bar me-2"></i>
+                Attendance Reports
+            </h2>
+            <div>
+                <a href="{{ url_for('login') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Login
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-users fa-2x text-primary mb-2"></i>
+                <h4>{{ total_students }}</h4>
+                <p class="mb-0">Total Students</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-calendar fa-2x text-success mb-2"></i>
+                <h4>{{ sorted_dates|length }}</h4>
+                <p class="mb-0">Days with Records</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-book fa-2x text-info mb-2"></i>
+                <h4>5</h4>
+                <p class="mb-0">Subjects</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fas fa-check-circle fa-2x text-warning mb-2"></i>
+                <h4>
+                    {% set total_attendance = 0 %}
+                    {% for date in sorted_dates %}
+                        {% for subject, records in attendance_summary[date].items() %}
+                            {% set total_attendance = total_attendance + records|length %}
+                        {% endfor %}
+                    {% endfor %}
+                    {{ total_attendance }}
+                </h4>
+                <p class="mb-0">Total Attendance</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if sorted_dates %}
+    {% for date in sorted_dates %}
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">
+                <i class="fas fa-calendar-day me-2"></i>
+                {{ date }}
+            </h5>
+        </div>
+        <div class="card-body">
+            {% if attendance_summary[date] %}
+                <div class="row">
+                    {% for subject, records in attendance_summary[date].items() %}
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card bg-body-secondary">
+                            <div class="card-header">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-book me-2"></i>
+                                    {{ subject }}
+                                    <span class="badge bg-primary ms-2">{{ records|length }}</span>
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row g-2">
+                                    {% for record in records %}
+                                    <div class="col-6">
+                                        <div class="d-flex justify-content-between align-items-center p-2 bg-body rounded">
+                                            <div>
+                                                <small class="fw-bold">{{ record.student_name }}</small>
+                                                <br>
+                                                <small class="text-muted">Roll: {{ record.roll_number }}</small>
+                                            </div>
+                                            <div class="text-end">
+                                                <small class="text-muted">{{ record.time }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-muted mb-0">No attendance records for this date.</p>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="card">
+        <div class="card-body text-center">
+            <i class="fas fa-inbox fa-4x text-muted mb-3"></i>
+            <h4>No Attendance Records</h4>
+            <p class="text-muted">No attendance has been marked yet. Records will appear here once students start marking their attendance.</p>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

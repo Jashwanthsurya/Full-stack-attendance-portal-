@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Attendance Confirmed - Student Attendance System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card border-success">
+            <div class="card-body text-center">
+                <div class="mb-4">
+                    <i class="fas fa-check-circle text-success fa-5x"></i>
+                </div>
+                
+                <h2 class="card-title text-success mb-3">Attendance Confirmed!</h2>
+                
+                <div class="alert alert-success" role="alert">
+                    <i class="fas fa-thumbs-up me-2"></i>
+                    Your attendance has been successfully recorded.
+                </div>
+                
+                <div class="card bg-body-secondary mb-4">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <i class="fas fa-receipt me-2"></i>Attendance Details
+                        </h6>
+                        <div class="row text-start">
+                            <div class="col-6">
+                                <p class="mb-1"><strong>Student:</strong></p>
+                                <p class="mb-1"><strong>Roll Number:</strong></p>
+                                <p class="mb-1"><strong>Subject:</strong></p>
+                                <p class="mb-0"><strong>Time:</strong></p>
+                            </div>
+                            <div class="col-6">
+                                <p class="mb-1">{{ session.student_name }}</p>
+                                <p class="mb-1">{{ session.roll_number }}</p>
+                                <p class="mb-1">{{ subject }}</p>
+                                <p class="mb-0">{{ time }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info" role="alert">
+                    <i class="fas fa-lightbulb me-2"></i>
+                    <small>Remember: You can only mark attendance once per subject per day</small>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-primary">
+                        <i class="fas fa-tachometer-alt me-2"></i>
+                        Back to Dashboard
+                    </a>
+                    <a href="{{ url_for('class_selection') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-plus me-2"></i>
+                        Mark Another Class
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
