@@ -15,11 +15,11 @@
 
                 <form method="POST">
                     <div class="mb-3">
-                        <label for="roll_number" class="form-label">
-                            <i class="fas fa-id-badge me-2"></i>Roll Number
+                        <label for="login_input" class="form-label">
+                            <i class="fas fa-user me-2"></i>Username
                         </label>
-                        <input type="number" class="form-control" id="roll_number" name="roll_number" 
-                               min="1" max="40" required placeholder="Enter your roll number (1-40)">
+                        <input type="text" class="form-control" id="login_input" name="login_input" 
+                               required placeholder="Enter your shortname (e.g., alex) or 'admin'">
                     </div>
 
                     <div class="mb-4">
@@ -44,7 +44,8 @@
                                 <i class="fas fa-info-circle me-2"></i>Login Information
                             </h6>
                             <small class="text-muted">
-                                Use your roll number (1-40) and password (pass01, pass02, etc.)
+                                Students: Use your shortname (alex, blake, etc.) and password (pass01, pass02, etc.)<br>
+                                Admin: Use 'admin' and password 'admin123'
                             </small>
                         </div>
                     </div>
