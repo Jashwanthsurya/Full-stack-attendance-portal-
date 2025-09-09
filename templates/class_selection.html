@@ -21,7 +21,7 @@
 <div class="row">
     {% for subject, info in available_classes.items() %}
     <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card h-100 {% if info.has_marked %}border-success{% elif info.is_available %}border-primary{% else %}border-secondary{% endif %}">
+        <div class="dashboard-card h-100 {% if info.has_marked %}border-success{% elif info.is_available %}border-primary{% else %}border-secondary{% endif %}">
             <div class="card-body d-flex flex-column">
                 <div class="text-center mb-3">
                     {% if info.has_marked %}
@@ -81,7 +81,7 @@
 
 <div class="row mt-4">
     <div class="col-12">
-        <div class="card bg-body-secondary">
+        <div class="dashboard-card bg-body-secondary">
             <div class="card-body">
                 <h5 class="card-title">
                     <i class="fas fa-info-circle me-2"></i>
