@@ -11,11 +11,11 @@ import io
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='../frontend/templates', static_folder='../frontend/static')
 app.secret_key = os.environ.get("SESSION_SECRET", "dev_secret_key_change_in_production")
 
 # Ensure data directory exists
-os.makedirs('data', exist_ok=True)
+os.makedirs('../database/data', exist_ok=True)
 
 # Class schedule with time restrictions
 CLASS_SCHEDULE = {
@@ -29,7 +29,7 @@ CLASS_SCHEDULE = {
 def load_students():
     """Load student data from JSON file"""
     try:
-        with open('data/students.json', 'r') as f:
+        with open('../database/data/students.json', 'r') as f:
             return json.load(f)
     except FileNotFoundError:
         # Create initial student data if file doesn't exist
@@ -56,20 +56,20 @@ def load_students():
 
 def save_students(students):
     """Save student data to JSON file"""
-    with open('data/students.json', 'w') as f:
+    with open('../database/data/students.json', 'w') as f:
         json.dump(students, f, indent=2)
 
 def load_attendance():
     """Load attendance data from JSON file"""
     try:
-        with open('data/attendance.json', 'r') as f:
+        with open('../database/data/attendance.json', 'r') as f:
             return json.load(f)
     except FileNotFoundError:
         return {}
 
 def save_attendance(attendance):
     """Save attendance data to JSON file"""
-    with open('data/attendance.json', 'w') as f:
+    with open('../database/data/attendance.json', 'w') as f:
         json.dump(attendance, f, indent=2)
 
 def is_class_time(subject):
