@@ -12,21 +12,28 @@ Preferred communication style: Simple, everyday language.
 
 ### Frontend Architecture
 - **Framework**: Bootstrap 5 with dark theme for responsive UI design
+- **File Structure**: Organized in `/frontend/` directory with:
+  - `frontend/templates/` - Jinja2 HTML templates
+  - `frontend/static/` - CSS, JavaScript, and static assets
 - **JavaScript**: Vanilla JavaScript for client-side interactions including auto-dismissing alerts, form loading states, and real-time clock display
 - **Template Engine**: Jinja2 templates with a base template system for consistent layout
 - **Styling**: Font Awesome icons for enhanced visual presentation
 
 ### Backend Architecture
 - **Framework**: Flask web framework with session-based authentication
-- **File Structure**: Modular approach with separate app.py for main application logic and main.py as entry point
+- **File Structure**: Organized in `/backend/` directory with:
+  - `backend/app.py` - Main application logic and Flask routes
+  - `backend/main.py` - Backend-specific entry point
+- **Entry Point**: Root `main.py` handles imports and runs the Flask app from backend directory
 - **Authentication**: Simple session-based login using roll numbers (1-40) and predefined passwords
 - **Business Logic**: Time-based class scheduling system that validates attendance marking windows
 
 ### Data Storage Solutions
 - **Storage Type**: JSON file-based storage system
+- **Storage Location**: Organized in `/database/` directory
 - **Data Files**: 
-  - `data/students.json` - Stores student information (40 students with roll numbers, names, passwords)
-  - `data/attendance.json` - Stores daily attendance records by date and subject
+  - `database/data/students.json` - Stores student information (40 students with roll numbers, names, passwords)
+  - `database/data/attendance.json` - Stores daily attendance records by date and subject
 - **Data Management**: File-based CRUD operations with automatic file creation and data initialization
 
 ### Class Schedule System
