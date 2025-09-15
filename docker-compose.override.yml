@@ -7,8 +7,6 @@ services:
       - FLASK_ENV=development
       - ATTENDANCE_DEBUG_MODE=true
     volumes:
-      - ./backend:/app:ro
-      - ./frontend:/app/frontend:ro
       - ./database/data:/app/database/data
     ports:
       - "5000:5000"

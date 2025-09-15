@@ -15,14 +15,13 @@ services:
   # Backend Flask application
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./backend/Dockerfile
     container_name: attendance_backend
     ports:
       - "5000:5000"
     volumes:
       - attendance_data:/app/database/data
-      - ./frontend:/app/frontend:ro
     environment:
       - SESSION_SECRET=your_secure_session_secret_here
       - FLASK_ENV=production
