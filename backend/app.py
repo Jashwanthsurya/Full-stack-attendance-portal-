@@ -11,11 +11,21 @@ import io
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
 
-app = Flask(__name__, template_folder='../frontend/templates', static_folder='../frontend/static')
+# Determine if running in Docker container or local development
+if os.path.exists('/app'):  # Docker container
+    template_folder = 'frontend/templates'
+    static_folder = 'frontend/static'
+    data_dir = 'database/data'
+else:  # Local development (via main.py)
+    template_folder = '../frontend/templates'
+    static_folder = '../frontend/static'
+    data_dir = '../database/data'
+
+app = Flask(__name__, template_folder=template_folder, static_folder=static_folder)
 app.secret_key = os.environ.get("SESSION_SECRET", "dev_secret_key_change_in_production")
 
 # Ensure data directory exists
-os.makedirs('../database/data', exist_ok=True)
+os.makedirs(data_dir, exist_ok=True)
 
 # Class schedule with time restrictions
 CLASS_SCHEDULE = {
@@ -29,7 +39,8 @@ CLASS_SCHEDULE = {
 def load_students():
     """Load student data from JSON file"""
     try:
-        with open('../database/data/students.json', 'r') as f:
+        data_file = 'database/data/students.json' if os.path.exists('/app') else '../database/data/students.json'
+        with open(data_file, 'r') as f:
             return json.load(f)
     except FileNotFoundError:
         # Create initial student data if file doesn't exist
@@ -56,20 +67,23 @@ def load_students():
 
 def save_students(students):
     """Save student data to JSON file"""
-    with open('../database/data/students.json', 'w') as f:
+    data_file = 'database/data/students.json' if os.path.exists('/app') else '../database/data/students.json'
+    with open(data_file, 'w') as f:
         json.dump(students, f, indent=2)
 
 def load_attendance():
     """Load attendance data from JSON file"""
     try:
-        with open('../database/data/attendance.json', 'r') as f:
+        data_file = 'database/data/attendance.json' if os.path.exists('/app') else '../database/data/attendance.json'
+        with open(data_file, 'r') as f:
             return json.load(f)
     except FileNotFoundError:
         return {}
 
 def save_attendance(attendance):
     """Save attendance data to JSON file"""
-    with open('../database/data/attendance.json', 'w') as f:
+    data_file = 'database/data/attendance.json' if os.path.exists('/app') else '../database/data/attendance.json'
+    with open(data_file, 'w') as f:
         json.dump(attendance, f, indent=2)
 
 def is_class_time(subject):

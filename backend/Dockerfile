@@ -17,19 +17,23 @@ RUN apt-get update \
         && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for better caching
-COPY requirements.txt .
+COPY backend/requirements.txt .
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend application files
-COPY app.py main.py ./
+# Copy frontend templates and static files (needed by Flask app)
+COPY frontend/templates ./frontend/templates/
+COPY frontend/static ./frontend/static/
 
-# Create necessary directories
-RUN mkdir -p frontend/templates frontend/static database/data
+# Copy backend application files
+COPY backend/app.py backend/main.py ./
+
+# Create database data directory
+RUN mkdir -p database/data
 
 # Expose port
 EXPOSE 5000
 
 # Run the application
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--reload", "app:app"]
