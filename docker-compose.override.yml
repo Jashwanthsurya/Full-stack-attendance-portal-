@@ -1,0 +1,15 @@
+# Development override for docker-compose
+version: '3.8'
+
+services:
+  backend:
+    environment:
+      - FLASK_ENV=development
+      - ATTENDANCE_DEBUG_MODE=true
+    volumes:
+      - ./backend:/app:ro
+      - ./frontend:/app/frontend:ro
+      - ./database/data:/app/database/data
+    ports:
+      - "5000:5000"
+    command: ["python", "app.py"]
