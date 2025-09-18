@@ -1,18 +1,14 @@
 version: '3.8'
 
 services:
-  # Database service for JSON file storage
+  
   database:
     build:
       context: ./database
       dockerfile: Dockerfile
     container_name: attendance_database
-    volumes:
-      - attendance_data:/data
-    networks:
-      - attendance_network
-
-  # Backend Flask application
+   #
+    #
   backend:
     build:
       context: .
@@ -20,18 +16,13 @@ services:
     container_name: attendance_backend
     ports:
       - "5000:5000"
-    volumes:
-      - attendance_data:/app/database/data
-    environment:
-      - SESSION_SECRET=your_secure_session_secret_here
-      - FLASK_ENV=production
+    #
+    #
     depends_on:
       - database
-    networks:
-      - attendance_network
+    #
     restart: unless-stopped
 
-  # Frontend Nginx service (optional, for production)
   frontend:
     build:
       context: ./frontend
@@ -41,14 +32,8 @@ services:
       - "80:80"
     depends_on:
       - backend
-    networks:
-      - attendance_network
+    #
     restart: unless-stopped
 
-volumes:
-  attendance_data:
-    driver: local
-
-networks:
-  attendance_network:
-    driver: bridge
+#
+#
