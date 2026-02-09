@@ -9,6 +9,6 @@ COPY data/ /data/
 RUN chmod 755 /data
 RUN chmod 644 /data/*.json
 
-VOLUME ["/data"]
+#
 
 CMD ["tail", "-f", "/dev/null"]
