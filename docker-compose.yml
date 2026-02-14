@@ -1,17 +1,6 @@
 version: '3.8'
 
 services:
-  
-  nginx:
-    image: nginx:alpine
-    container_name: attendance_nginx
-    ports:
-      - "8080:80"
-    #
-    depends_on:
-      - backend
-
-
   database:
     build:
       context: ./database
@@ -38,10 +27,8 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: attendance_frontend
-  #
+    ports:
+      - "8080:80"
     depends_on:
       - backend
-    #
-    
-
-#
+    restart: unless-stopped
