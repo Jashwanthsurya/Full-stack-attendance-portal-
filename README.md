@@ -5,10 +5,6 @@ This is the port mapping showing after succefully compose and building the conta
 <img width="1820" height="1016" alt="Vs code port output " src="https://github.com/user-attachments/assets/ba42199f-8ecb-4f32-8f4a-82726ad4ab31" />
 
 
-## 2 aws ec2 instances used 
-
-<img width="1862" height="1048" alt="Screenshot from 2026-02-26 19-25-44" src="https://github.com/user-attachments/assets/b1747b70-9587-490a-b945-5ff778921b97" />
-
 
 
 ## Below are the fully functional website images
